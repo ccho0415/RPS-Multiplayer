@@ -6,8 +6,16 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
 <body>
-<!-- <div class = "container" id = "username"></div> -->
+<div class = "container" id = "user">
+	<form id = "name">
+		<label for = "name">Write a User Name: </label>
+		<input type="text" id = "nameInput">
+		<button class = "btn" id = "addName">Button</button>
+	</form>
+</div>
+<div class = "container" id = "dummy"></div>
 <div class = "container" id = "gameField">
 	<div class = "" id = "paper">
 		<img class = "" id = "paperModel" src = "assets/images/squirtle.gif">
@@ -30,7 +38,7 @@
 		<h1 id = "tiesCounter"></h1>
 	</div>
 </div>
-<!-- <div class = "container" id = "chat"></div> -->
+<div class = "container" id = "chat"></div>
 </body>
 	<script type="text/javascript" src = "assets/javascript/index.js"></script>
 </html>
