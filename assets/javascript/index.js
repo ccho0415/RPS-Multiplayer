@@ -11,22 +11,22 @@ console.log("hi");
 var database = firebase.database();
 var users = [];
 $(document).ready( function(){
-$("#user").show();
-$("#gameField").hide();
-$("#score").hide();
+  $("#user").show();
+  $("#gameField").hide();
+  $("#score").hide();
 });
-database.ref().on("value", function(snapshot){
-
+database.ref().limitToLast(1).on("value", function(snapshot){
+  fire = snapshot.val();
+    $("#dummy").html(fire);
 });
 $("#addName").on("click", function(){
-event.preventDefault();
-console.log("hi I work");
-username = $("#nameInput").val().trim();
-users.push(username);
-console.log(users);
-database.ref().push({
-	username: users
+  event.preventDefault();
+  console.log("hi I work");
+  username = $("#nameInput").val().trim();
+  users.push(username);
+  console.log(users);
+  database.ref().push({
+	 username: users
 });
-
-return false;
+  return false;
 });
