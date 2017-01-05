@@ -11,6 +11,9 @@ console.log("hi");
 var database = firebase.database();
 var users = [];
 var username = "";
+var wins = 0;
+var losses = 0;
+var ties = 0;
 $(document).ready( function(){
   $("#user").show();
   $("#gameField").hide();
@@ -32,7 +35,10 @@ $("#addName").on("click", function(){
   username = $("#nameInput").val().trim();
   console.log(username);
   database.ref("users/" + username).set({
-	 username: username
+	 username: username,
+   wins: wins,
+   losses: losses,
+   ties: ties
 });
   return false;
 });
