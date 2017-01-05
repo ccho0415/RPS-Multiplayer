@@ -15,9 +15,8 @@ $(document).ready( function(){
   $("#gameField").hide();
   $("#score").hide();
 });
-database.ref().limitToLast(1).on("value", function(snapshot){
-  fire = snapshot.val();
-    $("#dummy").html(fire);
+database.ref().limitToLast(1).on("value", function(snapshot){  
+    console.log(snapshot.val().hi.username);
 });
 $("#addName").on("click", function(){
   event.preventDefault();
@@ -25,8 +24,8 @@ $("#addName").on("click", function(){
   username = $("#nameInput").val().trim();
   users.push(username);
   console.log(users);
-  database.ref().push({
-	 username: users
+  database.ref("users/" + username).set({
+	 username: username
 });
   return false;
 });
