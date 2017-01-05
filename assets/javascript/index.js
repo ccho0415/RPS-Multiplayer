@@ -10,20 +10,27 @@ console.log("hi");
  firebase.initializeApp(config);
 var database = firebase.database();
 var users = [];
+var username = "";
 $(document).ready( function(){
   $("#user").show();
   $("#gameField").hide();
   $("#score").hide();
 });
-database.ref().limitToLast(1).on("value", function(snapshot){  
-    console.log(snapshot.val().hi.username);
+
+database.ref("users/").on("value", function(snapshot){ 
+  let data = snapshot.val();
+  for (let entry in data) {
+    console.log(entry);
+    $("#dummy").text(entry);
+  }
+  // console.log(snapshot.val());
+  // $("#dummy").text(snapshot.val().username);
 });
 $("#addName").on("click", function(){
   event.preventDefault();
   console.log("hi I work");
   username = $("#nameInput").val().trim();
-  users.push(username);
-  console.log(users);
+  console.log(username);
   database.ref("users/" + username).set({
 	 username: username
 });
