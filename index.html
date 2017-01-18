@@ -7,13 +7,27 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
-<body>
-<div class = "container" id = "user">
-	<form id = "name">
-		<label for = "name">Write a User Name: </label>
-		<input type="text" id = "nameInput">
-		<button class = "btn" id = "addName">Button</button>
-	</form>
+<body style="background-image: url('assets/images/background.jpg')">
+<div class = "navbar navbar-default" id = "top-nav-bar">
+	<div class = "container-fluid">
+		<div class = "navbar-header">
+				<input type="email" id = "emailInput" placeholder="Email">
+				<input type="password" id="passwordInput" placeholder="Password">
+				<button class = "btn btn-action" id = "btnLogin">Login</button>
+				<button class = "btn btn-secondary" id = "btnSignUp">Sign Up</button>
+				<button class = "btn btn-action hide" id = "btnLogout">Log Out</button>
+		</div>
+	</div>
+</div>
+<div class = "container hide" id = "trainers">
+	<img class = "" id = "trainer-1" src="assets/images/trainers/trainer-1.png">
+	<img class = "" id = "trainer-2" src="assets/images/trainers/trainer-2.png">
+	<img class = "" id = "trainer-3" src="assets/images/trainers/trainer-3.png">
+	<img class = "" id = "trainer-4" src="assets/images/trainers/trainer-4.png">
+	<img class = "" id = "trainer-5" src="assets/images/trainers/trainer-5.png">
+	<img class = "" id = "trainer-6" src="assets/images/trainers/trainer-6.png">
+	<img class = "" id = "trainer-7" src="assets/images/trainers/trainer-7.png">
+	<img class = "" id = "trainer-8" src="assets/images/trainers/trainer-8.png">
 </div>
 <div class = "container" id = "dummy"></div>
 <div class = "container" id = "gameField">
@@ -38,7 +52,9 @@
 		<h1 id = "tiesCounter"></h1>
 	</div>
 </div>
-<div class = "container" id = "chat"></div>
+<div class = "container" id = "chat">
+	<button id = "test">TEST</button>
+</div>
 </body>
-	<script type="text/javascript" src = "assets/javascript/index.js"></script>
+	<script type="text/javascript" src = "assets/javascript/test.js"></script>
 </html>
