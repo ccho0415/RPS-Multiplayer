@@ -1,3 +1,4 @@
+// Online Status Should work as long as the user does not make multiple users in one session? (I'm not 100% sure about this one);
 console.log("hi");
   // Initialize Firebase
   var config = {
@@ -22,9 +23,6 @@ var bulbasaur = $("scissorsModel");
 var database = firebase.database();
 var provider = new firebase.auth.GoogleAuthProvider();
 var username = "";
-var wins = 0;
-var losses = 0;
-var ties = 0;
 $(document).ready( function(){
   $("#user").show();
   $("#gameField").show();
@@ -55,6 +53,11 @@ btnLogin.click( e => {
 });
 btnLogout.click(e=>{
   firebase.auth().signOut();
+  let uid = username;
+  let status = 0;
+  database.ref("users/"+ uid).update({
+    onlineStatus: status
+  });
 });
 function startGame(){
   if (user1 == charmander && user2 == squirtle){
@@ -80,6 +83,21 @@ function startGame(){
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if(firebaseUser){
     console.log(firebaseUser);
+    let uid = firebaseUser.uid;
+    let email = firebaseUser.email;
+    let wins = 0;
+    let losses = 0;
+    let ties = 0;
+    let status = 1;
+    username = uid;
+    database.ref("users/" + uid).set({
+      username: uid,
+      email: email,
+      wins: wins,
+      losses: losses,
+      ties: ties,
+      onlineStatus: status
+      });
     btnLogout.removeClass("hide");
     trainers.removeClass("hide");
   } else{
