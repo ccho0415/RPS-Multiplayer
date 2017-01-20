@@ -97,7 +97,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
       losses: losses,
       ties: ties,
       onlineStatus: status
-      });
+    });
     btnLogout.removeClass("hide");
     trainers.removeClass("hide");
   } else{
@@ -106,18 +106,3 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     trainers.addClass("hide");
   }
 });
-// Obtaining UID information
-  // let user =firebase.auth().currentUser;
-  // let uid;
-  // if (user!=null){
-  //   uid = user.uid;
-  //   console.log(uid);
-  // }
-  //   console.log(username);
-//   database.ref("users/" + uid).set({
-//   username: uid,
-//    email: email,
-//    wins: wins,
-//    losses: losses,
-//    ties: ties
-// });
