@@ -115,7 +115,18 @@ database.ref("onlineUsers/").on("value", function(snapshot){
   console.log(data);
   console.log(dataArr);
   if (dataArr.length == 2) {
-    console.log("hi!");  
+    console.log("hi!");
+    //Start the Game here!
+    let user1 = dataArr[0];
+    let user2 = dataArr[1];
+    database.ref("games/"+"game1").set({
+      user1: user1,
+      user1hp: 5,
+      user1click: "nothing",
+      user2: user2,
+      user2hp: 5,
+      user2click: "nothing"
+    })  
   }else{
     console.log("not hi!");
   }
