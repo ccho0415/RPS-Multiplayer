@@ -146,8 +146,8 @@ let user2 = "";
 let userclick = "";
 let user1click = 0;
 let user2click = 0;
-var user1hp = 0;
-var user2hp = 0;
+let user1hp = 0;
+let user2hp = 0;
 database.ref("games/"+"game1").on("value", function(snapshot){
   user1 = snapshot.val().user1;
   user2 = snapshot.val().user2;
@@ -222,8 +222,8 @@ function process(){
           let newuser1hp = parseInt(user1hp)-1
           console.log(newuser1hp);
           database.ref("games/"+"game1").update({
-          user1click: nothing,
-          user2click: nothing,
+          user1click: "nothing",
+          user2click: "nothing",
           user1hp: newuser1hp
           });
   }else if(user1click == bulbasaurClick && user2click == squirtleClick){
@@ -231,8 +231,8 @@ function process(){
           let newuser2hp = parseInt(user2hp)-1
           console.log(newuser1hp);          
           database.ref("games/"+"game1").update({
-          user1click: nothing,
-          user2click: nothing,
+          user1click: "nothing",
+          user2click: "nothing",
           user2hp: newuser2hp
           });
   }else if(user1click == squirtleClick && user2click == charmanderClick){
@@ -240,8 +240,8 @@ function process(){
           let newuser2hp = parseInt(user2hp)-1
           console.log(newuser2hp);
           database.ref("games/"+"game1").update({
-          user1click: nothing,
-          user2click: nothing,
+          user1click: "nothing",
+          user2click: "nothing",
           user2hp: newuser2hp
           });
   }else if(user1click == bulbasaurClick && user2click == charmanderClick){
@@ -249,8 +249,8 @@ function process(){
           let newuser1hp = parseInt(user1hp)-1
           console.log(newuser1hp);
           database.ref("games/"+"game1").update({
-          user1click: nothing,
-          user2click: nothing,
+          user1click: "nothing",
+          user2click: "nothing",
           user1hp: newuser1hp
           });;
   }else if(user1click == charmanderClick && user2click == bulbasaurClick){
@@ -258,8 +258,8 @@ function process(){
           let newuser2hp = parseInt(user2hp)-1
           console.log(newuser2hp);
           database.ref("games/"+"game1").update({
-          user1click: nothing,
-          user2click: nothing,
+          user1click: "nothing",
+          user2click: "nothing",
           user2hp: newuser2hp
           });
   }else if(user1click == squirtleClick && user2click == bulbasaurClick){
@@ -267,27 +267,27 @@ function process(){
           let newuser1hp = parseInt(user1hp)-1
           console.log(newuser1hp);
           database.ref("games/"+"game1").update({
-          user1click: nothing,
-          user2click: nothing,
+          user1click: "nothing",
+          user2click: "nothing",
           user1hp: newuser1hp
           });
   }else if(user1click == charmanderClick && user2click == charmanderClick){
           alert('this is a tie');
           database.ref("games/"+"game1").update({
-          user1click: nothing,
-          user2click: nothing
+          user1click: "nothing",
+          user2click: "nothing"
           });
   }else if(user1click == squirtleClick  && user2click == squirtleClick ){
           alert('this is a tie');
           database.ref("games/"+"game1").update({
-          user1click: nothing,
-          user2click: nothing
+          user1click: "nothing",
+          user2click: "nothing"
           });
   }else if(user1click == bulbasaurClick && user2click == bulbasaurClick){
           alert('this is a tie');
           database.ref("games/"+"game1").update({
-          user1click: nothing,
-          user2click: nothing
+          user1click: "nothing",
+          user2click: "nothing"
           });   
   }
 }
