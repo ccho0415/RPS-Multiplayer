@@ -64,7 +64,7 @@ btnLogout.click(e=>{
 // Add a realtime listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if(firebaseUser){
-    console.log(firebaseUser);
+    console.log(firebaseUser); 
     let uid = firebaseUser.uid;
     let email = firebaseUser.email;
     let wins = 0;
@@ -96,8 +96,8 @@ database.ref("users/").on("value", function(snapshot){
     let online = val.onlineStatus;
     let username= val.username;
     if (online === 1){
-      database.ref("onlineUsers/").update({
-        online: username
+      database.ref("onlineUsers/"+username).update({
+        online:online
       });
     // Display loading screen here
 
@@ -109,22 +109,20 @@ database.ref("users/").on("value", function(snapshot){
 });
 database.ref("onlineUsers/").on("value", function(snapshot){
   let data = snapshot.val();
-  let dataobj = JSON.stringify(data);
-  let dataArr = dataobj.split(",");
-  // Convert into strings and arrays (got the idea from class)
-  console.log(data);
-  console.log(dataArr);
 // extracted user names
-  for(value in data){
-    let username = (data[value]);
-    console.log(username);
-  }
+ let usersArr= Object.keys(data); 
+ let user1= usersArr[0];
+ let user2= usersArr[1];
+  // for(value in data){
+  //   console.log(value);
+  //   let username = (data[value]);
+  //   console.log(username);
+
+  // }
   // Make it so that it properly prints out user names
-  if (dataArr.length == 2) {
+  if (usersArr.length == 2) {
     console.log("hi!");
     //Start the Game here!
-    let user1 = dataArr[0];
-    let user2 = dataArr[1];
     database.ref("games/"+"game1").set({
       user1: user1,
       user1hp: 5,
@@ -138,9 +136,54 @@ database.ref("onlineUsers/").on("value", function(snapshot){
     console.log("not hi!");
   }
 });
-  // datastr= JSON.stringify(data, onlineStatus, 4);
-  // let dataobj = datastr;
-  // console.log(dataobj);
-  // for (let property in data){
-  //   console.log(property);
-  // }
+// Game JS
+var charmander = $("#rockModel");
+var squirtle = $("#paperModel");
+var bulbasaur = $("scissorsModel");
+var charmanderClick  = 0;
+var squirtleClick = 0;
+var bulbasaurClick = 0;
+let user1 = "";
+let user2 = "";
+database.ref("games/"+"game1").on("value", function(snapshot){
+  user1 = snapshot.val().user1;
+  user2 = snapshot.val().user2;
+})
+
+//   charmander.on("click", function(event){
+//     charmanderClick = 1;
+//     user1 = charmanderClick;
+//     console.log(user1);
+//   });
+//   squirtle.on("click", function(event){
+//     squirtleClick = 2;
+//     user2 = squirtleClick;
+//     console.log(squirtleClick);
+//   });
+//   bulbasaur.on("click", function(event){
+//     bulbasaurClick =3;
+//     user = bulbasaurClick;
+//   });
+// function process(){
+//   if (user1 == charmanderClick && user2 == squirtleClick){
+//           console.log('user 2 won');
+//   }else if(user1 == bulbasaurClick && user2 == squirtleClick){
+//           console.log('user 1 won');
+//   }else if(user1 == squirtleClick && user2 == charmanderClick){
+//           console.log('user 1 won');
+//   }else if(user1 == bulbasaurClick && user2 == charmanderClick){
+//           console.log('user 2 won');
+//   }else if(user1 == charmanderClick && user2 == bulbasaurClick){
+//           console.log('user 1 won');
+//   }else if(user1 == squirtleClick && user2 == bulbasaurClick){
+//           console.log('user 2 won');
+//   }else if(user1 == charmanderClick && user2 == charmanderClick){
+//           console.log('this is a tie');
+//   }else if(user1 == squirtleClick  && user2 == squirtleClick ){
+//           console.log('this is a tie');
+//   }else if(user1 == bulbasaurClick && user2 == bulbasaurClick)
+//           console.log('this is a tie');   
+// }
+// $("#test").on("click", function(){
+//   process();
+// });
