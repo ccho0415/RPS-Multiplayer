@@ -151,6 +151,9 @@ database.ref("games/"+"game1").on("value", function(snapshot){
   user2 = snapshot.val().user2;
   user1click = snapshot.val().user1click;
   user2click = snapshot.val().user2click;
+  if (user1click== 1||2||3 && user2click == 1||2||3){
+    proces();
+  }
 });
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -208,6 +211,8 @@ charmander.on("click", function(event){
       }
     });
   });
+
+function process(){
   if (user1click == charmanderClick && user2click == squirtleClick){
           alert('user 2 won');
   }else if(user1click == bulbasaurClick && user2click == squirtleClick){
@@ -226,6 +231,7 @@ charmander.on("click", function(event){
           alert('this is a tie');
   }else if(user1click == bulbasaurClick && user2click == bulbasaurClick){
           alert('this is a tie');   
+}
 }
 // $("#test").on("click", function(){
 //   process();
