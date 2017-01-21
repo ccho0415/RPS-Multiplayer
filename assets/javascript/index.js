@@ -224,7 +224,7 @@ charmander.on("click", function(event){
           alert('this is a tie');
   }else if(user1click == squirtleClick  && user2click == squirtleClick ){
           alert('this is a tie');
-  }else if(user1click == bulbasaurClick && user2click == bulbasaurClick)
+  }else if(user1click == bulbasaurClick && user2click == bulbasaurClick){
           alert('this is a tie');   
 }
 // $("#test").on("click", function(){
