@@ -165,7 +165,7 @@ charmander.on("click", function(event){
         database.ref("games/"+"game1").update({
           user1click: userclick
         });
-      } else {
+      } else if (user.uid == user2) {
         database.ref("games/"+"game1").update({
           user2click: userclick
         });
@@ -182,7 +182,7 @@ charmander.on("click", function(event){
         database.ref("games/"+"game1").update({
           user1click: userclick
         });
-      } else {
+      } else if (user.uid == user2){
         database.ref("games/"+"game1").update({
           user2click: userclick
         });
@@ -197,7 +197,7 @@ charmander.on("click", function(event){
         database.ref("games/"+"game1").update({
           user2click: userclick
         });
-      } else {
+      } else if (user.uid == user2){
         database.ref("games/"+"game1").update({
           user2click: userclick
         });
