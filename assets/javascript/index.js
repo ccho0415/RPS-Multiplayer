@@ -155,7 +155,7 @@ database.ref("games/"+"game1").on("value", function(snapshot){
   user2click = snapshot.val().user2click;
   user1hp = snapshot.val().user1hp;
   user2hp = snapshot.val().user2hp;
-  if (user1click== 1||2||3 && user2click == 1||2||3){
+  if (user1click == 1||2||3 && user2click == 1||2||3){
     process();
   }
 });
@@ -229,7 +229,7 @@ function process(){
   }else if(user1click == bulbasaurClick && user2click == squirtleClick){
           alert('user 1 won');
           let newuser2hp = parseInt(user2hp)-1
-          console.log(newuser1hp);          
+          console.log(newuser2hp);          
           database.ref("games/"+"game1").update({
           user1click: "nothing",
           user2click: "nothing",
