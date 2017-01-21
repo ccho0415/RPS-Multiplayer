@@ -96,8 +96,8 @@ database.ref("users/").on("value", function(snapshot){
     let online = val.onlineStatus;
     let username= val.username;
     if (online === 1){
-      database.ref("onlineUsers/"+username).set({
-        online:online
+      database.ref("onlineUsers/").update({
+        online: username
       });
     // Display loading screen here
 
@@ -114,6 +114,11 @@ database.ref("onlineUsers/").on("value", function(snapshot){
   // Convert into strings and arrays (got the idea from class)
   console.log(data);
   console.log(dataArr);
+// extracted user names
+  for(value in data){
+    let username = (data[value]);
+    console.log(username);
+  }
   // Make it so that it properly prints out user names
   if (dataArr.length == 2) {
     console.log("hi!");
