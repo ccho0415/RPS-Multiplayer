@@ -202,7 +202,7 @@ charmander.on("click", function(event){
     firebase.auth().onAuthStateChanged(function(user) {
       if (user.uid == user1) {
         database.ref("games/"+"game1").update({
-          user2click: userclick
+          user1click: userclick
         });
       } else if (user.uid == user2){
         database.ref("games/"+"game1").update({
@@ -231,7 +231,7 @@ function process(){
           alert('this is a tie');
   }else if(user1click == bulbasaurClick && user2click == bulbasaurClick){
           alert('this is a tie');   
-}
+  }
 }
 // $("#test").on("click", function(){
 //   process();
