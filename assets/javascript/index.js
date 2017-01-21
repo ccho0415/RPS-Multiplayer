@@ -146,11 +146,15 @@ let user2 = "";
 let userclick = "";
 let user1click = 0;
 let user2click = 0;
+var user1hp = 0;
+var user2hp = 0;
 database.ref("games/"+"game1").on("value", function(snapshot){
   user1 = snapshot.val().user1;
   user2 = snapshot.val().user2;
   user1click = snapshot.val().user1click;
   user2click = snapshot.val().user2click;
+  user1hp = snapshot.val().user1hp;
+  user2hp = snapshot.val().user2hp;
   if (user1click== 1||2||3 && user2click == 1||2||3){
     process();
   }
@@ -215,22 +219,70 @@ charmander.on("click", function(event){
 function process(){
   if (user1click == charmanderClick && user2click == squirtleClick){
           alert('user 2 won');
+          let newuser1hp = parseInt(user1hp)-1
+          database.ref("games/"+"game1").update({
+          user1click: nothing,
+          user2click: nothing,
+          user1hp: newuser1hp
+          });
   }else if(user1click == bulbasaurClick && user2click == squirtleClick){
           alert('user 1 won');
+          let newuser2hp = parseInt(user2hp)-1
+          database.ref("games/"+"game1").update({
+          user1click: nothing,
+          user2click: nothing,
+          user2hp: newuser2hp
+          });
   }else if(user1click == squirtleClick && user2click == charmanderClick){
           alert('user 1 won');
+          let newuser2hp = parseInt(user2hp)-1
+          database.ref("games/"+"game1").update({
+          user1click: nothing,
+          user2click: nothing,
+          user2hp: newuser2hp
+          });
   }else if(user1click == bulbasaurClick && user2click == charmanderClick){
           alert('user 2 won');
+          let newuser1hp = parseInt(user1hp)-1
+          database.ref("games/"+"game1").update({
+          user1click: nothing,
+          user2click: nothing,
+          user1hp: newuser1hp
+          });;
   }else if(user1click == charmanderClick && user2click == bulbasaurClick){
           alert('user 1 won');
+          let newuser2hp = parseInt(user2hp)-1
+          database.ref("games/"+"game1").update({
+          user1click: nothing,
+          user2click: nothing,
+          user2hp: newuser2hp
+          });
   }else if(user1click == squirtleClick && user2click == bulbasaurClick){
           alert('user 2 won');
+          let newuser1hp = parseInt(user1hp)-1
+          database.ref("games/"+"game1").update({
+          user1click: nothing,
+          user2click: nothing,
+          user1hp: newuser1hp
+          });
   }else if(user1click == charmanderClick && user2click == charmanderClick){
           alert('this is a tie');
+          database.ref("games/"+"game1").update({
+          user1click: nothing,
+          user2click: nothing
+          });
   }else if(user1click == squirtleClick  && user2click == squirtleClick ){
           alert('this is a tie');
+          database.ref("games/"+"game1").update({
+          user1click: nothing,
+          user2click: nothing
+          });
   }else if(user1click == bulbasaurClick && user2click == bulbasaurClick){
-          alert('this is a tie');   
+          alert('this is a tie');
+          database.ref("games/"+"game1").update({
+          user1click: nothing,
+          user2click: nothing
+          });   
   }
 }
 // $("#test").on("click", function(){
