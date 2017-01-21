@@ -23,6 +23,8 @@ var bulbasaur = $("scissorsModel");
 var database = firebase.database();
 var provider = new firebase.auth.GoogleAuthProvider();
 var username = "";
+var onlineStatus = [];
+var dataobj={};
 $(document).ready( function(){
   $("#user").show();
   $("#gameField").show();
@@ -59,26 +61,6 @@ btnLogout.click(e=>{
     onlineStatus: status
   });
 });
-function startGame(){
-  if (user1 == charmander && user2 == squirtle){
-          console.log('user 2 won');
-  }else if(user1 == bulbasaur && user2 == squirtle){
-          console.log('user 1 won');
-  }else if(user1 == squirtle && user2 == charmander){
-          console.log('user 1 won');
-  }else if(user1 == bulbasaur && user2 == charmander){
-          console.log('user 2 won');
-  }else if(user1 == charmander && user2 == bulbasaur){
-          console.log('user 1 won');
-  }else if(user1 == squirtle && user2 == bulbasaur){
-          console.log('user 2 won');
-  }else if(user1 == charmander && user2 == charmander){
-          console.log('this is a tie');
-  }else if(user1 == squirtle  && user2 == squirtle ){
-          console.log('this is a tie');
-  }else if(user1 == bulbasaur && user2 == bulbasaur)
-          console.log('this is a tie'); 
-};
 // Add a realtime listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if(firebaseUser){
@@ -106,3 +88,27 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     trainers.addClass("hide");
   }
 });
+//Pushing Online Status onto an Array on Firebase called Online Status
+database.ref("users/").on("value", function(snapshot){ 
+  let data = snapshot.val();
+  console.log(data);
+  $.each(data, function(index, val){
+    let online = val.onlineStatus;
+    let username= val.username;
+
+    if (online === 1){
+      database.ref("onlineUsers/"+username).set({
+        online:online
+      });
+    }else{
+      database.ref("onlineUsers/"+username).remove();
+
+    }
+  });
+});
+  // datastr= JSON.stringify(data, onlineStatus, 4);
+  // let dataobj = datastr;
+  // console.log(dataobj);
+  // for (let property in data){
+  //   console.log(property);
+  // }
