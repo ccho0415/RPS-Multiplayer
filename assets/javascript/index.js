@@ -137,7 +137,7 @@ database.ref("onlineUsers/").on("value", function(snapshot){
 // Game JS
 var charmander = $("#rockModel");
 var squirtle = $("#paperModel");
-var bulbasaur = $("scissorsModel");
+var bulbasaur = $("#scissorsModel");
 var charmanderClick  = 0;
 var squirtleClick = 0;
 var bulbasaurClick = 0;
