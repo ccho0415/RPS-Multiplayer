@@ -220,6 +220,7 @@ function process(){
   if (user1click == charmanderClick && user2click == squirtleClick){
           alert('user 2 won');
           let newuser1hp = parseInt(user1hp)-1
+          console.log(newuser1hp);
           database.ref("games/"+"game1").update({
           user1click: nothing,
           user2click: nothing,
@@ -228,6 +229,7 @@ function process(){
   }else if(user1click == bulbasaurClick && user2click == squirtleClick){
           alert('user 1 won');
           let newuser2hp = parseInt(user2hp)-1
+          console.log(newuser1hp);          
           database.ref("games/"+"game1").update({
           user1click: nothing,
           user2click: nothing,
@@ -236,6 +238,7 @@ function process(){
   }else if(user1click == squirtleClick && user2click == charmanderClick){
           alert('user 1 won');
           let newuser2hp = parseInt(user2hp)-1
+          console.log(newuser2hp);
           database.ref("games/"+"game1").update({
           user1click: nothing,
           user2click: nothing,
@@ -244,6 +247,7 @@ function process(){
   }else if(user1click == bulbasaurClick && user2click == charmanderClick){
           alert('user 2 won');
           let newuser1hp = parseInt(user1hp)-1
+          console.log(newuser1hp);
           database.ref("games/"+"game1").update({
           user1click: nothing,
           user2click: nothing,
@@ -252,6 +256,7 @@ function process(){
   }else if(user1click == charmanderClick && user2click == bulbasaurClick){
           alert('user 1 won');
           let newuser2hp = parseInt(user2hp)-1
+          console.log(newuser2hp);
           database.ref("games/"+"game1").update({
           user1click: nothing,
           user2click: nothing,
@@ -260,6 +265,7 @@ function process(){
   }else if(user1click == squirtleClick && user2click == bulbasaurClick){
           alert('user 2 won');
           let newuser1hp = parseInt(user1hp)-1
+          console.log(newuser1hp);
           database.ref("games/"+"game1").update({
           user1click: nothing,
           user2click: nothing,
