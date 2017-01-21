@@ -208,8 +208,6 @@ charmander.on("click", function(event){
       }
     });
   });
-
-function process(){
   if (user1click == charmanderClick && user2click == squirtleClick){
           alert('user 2 won');
   }else if(user1click == bulbasaurClick && user2click == squirtleClick){
