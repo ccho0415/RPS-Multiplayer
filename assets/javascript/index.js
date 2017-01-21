@@ -95,16 +95,30 @@ database.ref("users/").on("value", function(snapshot){
   $.each(data, function(index, val){
     let online = val.onlineStatus;
     let username= val.username;
-
     if (online === 1){
       database.ref("onlineUsers/"+username).set({
         online:online
       });
+    // Display loading screen here
+
+// Removing Users if they are not online
     }else{
       database.ref("onlineUsers/"+username).remove();
-
     }
   });
+});
+database.ref("onlineUsers/").on("value", function(snapshot){
+  let data = snapshot.val();
+  let dataobj = JSON.stringify(data);
+  let dataArr = dataobj.split(",");
+  // Convert into strings and arrays (got the idea from class)
+  console.log(data);
+  console.log(dataArr);
+  if (dataArr.length == 2) {
+    console.log("hi!");  
+  }else{
+    console.log("not hi!");
+  }
 });
   // datastr= JSON.stringify(data, onlineStatus, 4);
   // let dataobj = datastr;
