@@ -144,9 +144,13 @@ var bulbasaurClick = 0;
 let user1 = "";
 let user2 = "";
 let userclick = "";
+let user1click = 0;
+let user2click = 0;
 database.ref("games/"+"game1").on("value", function(snapshot){
   user1 = snapshot.val().user1;
   user2 = snapshot.val().user2;
+  user1click = snapshot.val().user1click;
+  user2click = snapshot.val().user2click;
 });
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -204,25 +208,26 @@ charmander.on("click", function(event){
       }
     });
   });
+
 function process(){
-  if (user1 == charmanderClick && user2 == squirtleClick){
-          console.log('user 2 won');
-  }else if(user1 == bulbasaurClick && user2 == squirtleClick){
-          console.log('user 1 won');
-  }else if(user1 == squirtleClick && user2 == charmanderClick){
-          console.log('user 1 won');
-  }else if(user1 == bulbasaurClick && user2 == charmanderClick){
-          console.log('user 2 won');
-  }else if(user1 == charmanderClick && user2 == bulbasaurClick){
-          console.log('user 1 won');
-  }else if(user1 == squirtleClick && user2 == bulbasaurClick){
-          console.log('user 2 won');
-  }else if(user1 == charmanderClick && user2 == charmanderClick){
-          console.log('this is a tie');
-  }else if(user1 == squirtleClick  && user2 == squirtleClick ){
-          console.log('this is a tie');
-  }else if(user1 == bulbasaurClick && user2 == bulbasaurClick)
-          console.log('this is a tie');   
+  if (user1click == charmanderClick && user2click == squirtleClick){
+          alert('user 2 won');
+  }else if(user1click == bulbasaurClick && user2click == squirtleClick){
+          alert('user 1 won');
+  }else if(user1click == squirtleClick && user2click == charmanderClick){
+          alert('user 1 won');
+  }else if(user1click == bulbasaurClick && user2click == charmanderClick){
+          alert('user 2 won');
+  }else if(user1click == charmanderClick && user2click == bulbasaurClick){
+          alert('user 1 won');
+  }else if(user1click == squirtleClick && user2click == bulbasaurClick){
+          alert('user 2 won');
+  }else if(user1click == charmanderClick && user2click == charmanderClick){
+          alert('this is a tie');
+  }else if(user1click == squirtleClick  && user2click == squirtleClick ){
+          alert('this is a tie');
+  }else if(user1click == bulbasaurClick && user2click == bulbasaurClick)
+          alert('this is a tie');   
 }
 // $("#test").on("click", function(){
 //   process();
