@@ -152,7 +152,7 @@ database.ref("games/"+"game1").on("value", function(snapshot){
   user1click = snapshot.val().user1click;
   user2click = snapshot.val().user2click;
   if (user1click== 1||2||3 && user2click == 1||2||3){
-    proces();
+    process();
   }
 });
 firebase.auth().onAuthStateChanged(function(user) {
