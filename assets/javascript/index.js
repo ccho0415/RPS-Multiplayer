@@ -114,6 +114,7 @@ database.ref("onlineUsers/").on("value", function(snapshot){
   // Convert into strings and arrays (got the idea from class)
   console.log(data);
   console.log(dataArr);
+  // Make it so that it properly prints out user names
   if (dataArr.length == 2) {
     console.log("hi!");
     //Start the Game here!
@@ -126,7 +127,8 @@ database.ref("onlineUsers/").on("value", function(snapshot){
       user2: user2,
       user2hp: 5,
       user2click: "nothing"
-    })  
+    });
+
   }else{
     console.log("not hi!");
   }
