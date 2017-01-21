@@ -167,7 +167,7 @@ charmander.on("click", function(event){
         });
       } else {
         database.ref("games/"+"game1").update({
-          user1click: userclick
+          user2click: userclick
         });
       }
     });
@@ -184,7 +184,7 @@ charmander.on("click", function(event){
         });
       } else {
         database.ref("games/"+"game1").update({
-          user1click: userclick
+          user2click: userclick
         });
       }
     });    
@@ -195,11 +195,11 @@ charmander.on("click", function(event){
     firebase.auth().onAuthStateChanged(function(user) {
       if (user.uid == user1) {
         database.ref("games/"+"game1").update({
-          user1click: userclick
+          user2click: userclick
         });
       } else {
         database.ref("games/"+"game1").update({
-          user1click: userclick
+          user2click: userclick
         });
       }
     });
