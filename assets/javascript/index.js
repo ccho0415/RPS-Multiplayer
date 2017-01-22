@@ -1,14 +1,18 @@
+// Current Bugs:
+// (This one is intended): It will refresh the game everytime the refresh button is hit. <- Not sure if I should change this (Line 88)
+// First game clicks do not register properly
+
 // Online Status Should work as long as the user does not make multiple users in one session? (I'm not 100% sure about this one);
 console.log("hi");
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDQVu06TGTWcvConzQ0WWC08AZOmhjAIsU",
-    authDomain: "rps-multiplayer-a7a5c.firebaseapp.com",
-    databaseURL: "https://rps-multiplayer-a7a5c.firebaseio.com",
-    storageBucket: "rps-multiplayer-a7a5c.appspot.com",
-    messagingSenderId: "687688931226"
-  };
- firebase.initializeApp(config);
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyDQVu06TGTWcvConzQ0WWC08AZOmhjAIsU",
+  authDomain: "rps-multiplayer-a7a5c.firebaseapp.com",
+  databaseURL: "https://rps-multiplayer-a7a5c.firebaseio.com",
+  storageBucket: "rps-multiplayer-a7a5c.appspot.com",
+  messagingSenderId: "687688931226"
+};
+firebase.initializeApp(config);
 // DOM Elements
 var emailInput = $("#emailInput");
 var passwordInput = $("#passwordInput");
@@ -18,13 +22,22 @@ var btnLogout = $("#btnLogout");
 var trainers = $("#trainers");
 var charmander = $("#rockModel");
 var squirtle = $("#paperModel");
-var bulbasaur = $("scissorsModel");
+var bulbasaur = $("#scissorsModel");
 // Global Vars
 var database = firebase.database();
 var provider = new firebase.auth.GoogleAuthProvider();
 var username = "";
-var onlineStatus = [];
-var dataobj={};
+var charmanderClick  = 0;
+var squirtleClick = 0;
+var bulbasaurClick = 0;
+let user1 = "";
+let user2 = "";
+let userclick = "";
+let user1click = 0;
+let user2click = 0;
+let user1hp = 0;
+let user2hp = 0;
+// Initial Load
 $(document).ready( function(){
   $("#user").show();
   $("#gameField").show();
@@ -53,6 +66,7 @@ btnLogin.click( e => {
 
   return false;
 });
+// Logout Event
 btnLogout.click(e=>{
   firebase.auth().signOut();
   let uid = username;
@@ -61,7 +75,7 @@ btnLogout.click(e=>{
     onlineStatus: status
   });
 });
-// Add a realtime listener
+// Add a realtime listener to check online status
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if(firebaseUser){
     let uid = firebaseUser.uid;
@@ -96,9 +110,8 @@ database.ref("users/").on("value", function(snapshot){
     if (online === 1){
       database.ref("onlineUsers/"+username).update({
         online:online
-      });
-    // Display loading screen here
-
+    });
+      // Display loading screen here
 // Removing Users if they are not online
     }else{
       database.ref("onlineUsers/"+username).remove();
@@ -108,19 +121,10 @@ database.ref("users/").on("value", function(snapshot){
 database.ref("onlineUsers/").on("value", function(snapshot){
   let data = snapshot.val();
 // extracted user names
- let usersArr= Object.keys(data); 
- let user1= usersArr[0];
- let user2= usersArr[1];
-  // for(value in data){
-  //   console.log(value);
-  //   let username = (data[value]);
-  //   console.log(username);
-
-  // }
-  // Make it so that it properly prints out user names
+  let usersArr= Object.keys(data); 
+  let user1= usersArr[0];
+  let user2= usersArr[1];
   if (usersArr.length == 2) {
-    console.log("hi!");
-    //Start the Game here!
     database.ref("games/"+"game1").set({
       user1: user1,
       user1hp: 5,
@@ -129,25 +133,11 @@ database.ref("onlineUsers/").on("value", function(snapshot){
       user2hp: 5,
       user2click: "nothing"
     });
-
   }else{
     console.log("not hi!");
   }
 });
 // Game JS
-var charmander = $("#rockModel");
-var squirtle = $("#paperModel");
-var bulbasaur = $("#scissorsModel");
-var charmanderClick  = 0;
-var squirtleClick = 0;
-var bulbasaurClick = 0;
-let user1 = "";
-let user2 = "";
-let userclick = "";
-let user1click = 0;
-let user2click = 0;
-let user1hp = 0;
-let user2hp = 0;
 database.ref("games/"+"game1").on("value", function(snapshot){
   user1 = snapshot.val().user1;
   user2 = snapshot.val().user2;
@@ -155,142 +145,130 @@ database.ref("games/"+"game1").on("value", function(snapshot){
   user2click = snapshot.val().user2click;
   user1hp = snapshot.val().user1hp;
   user2hp = snapshot.val().user2hp;
+// Checking for userclicks
   if (user1click == 1||2||3 && user2click == 1||2||3){
     process();
+  }else{
+    console.log("error")
+  }
+  if (user1hp == 0){
+    alert("user 2 wins!");
+  }else if (user2hp ==0){
+    alert("user 1 wins!");
   }
 });
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    console.log(user.uid);
-  } else {
-    console.log(nope);
-  }
-});
-
 charmander.on("click", function(event){
-    charmanderClick = 1;
-    userclick= charmanderClick;
-    console.log(user1);
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user.uid == user1) {
-        database.ref("games/"+"game1").update({
-          user1click: userclick
-        });
-      } else if (user.uid == user2) {
-        database.ref("games/"+"game1").update({
-          user2click: userclick
-        });
-      }
-    });
-
-  });
-  squirtle.on("click", function(event){
-    squirtleClick = 2;
-    userclick = squirtleClick;
-    console.log(squirtleClick);
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user.uid == user1) {
-        database.ref("games/"+"game1").update({
-          user1click: userclick
-        });
-      } else if (user.uid == user2){
-        database.ref("games/"+"game1").update({
-          user2click: userclick
-        });
-      }
-    });    
-  });
-  bulbasaur.on("click", function(event){
-    bulbasaurClick =3;
-    userclick = bulbasaurClick;
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user.uid == user1) {
-        database.ref("games/"+"game1").update({
-          user1click: userclick
-        });
-      } else if (user.uid == user2){
-        database.ref("games/"+"game1").update({
-          user2click: userclick
-        });
-      }
-    });
+  charmanderClick = 1;
+  userclick= charmanderClick;
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user.uid == user1) {
+      database.ref("games/"+"game1").update({
+        user1click: userclick
+      });
+    }else if (user.uid == user2) {
+      database.ref("games/"+"game1").update({
+        user2click: userclick
+      });
+    }
   });
 
+});
+squirtle.on("click", function(event){
+  squirtleClick = 2;
+  userclick = squirtleClick;
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user.uid == user1) {
+      database.ref("games/"+"game1").update({
+        user1click: userclick
+      });
+    }else if (user.uid == user2){
+      database.ref("games/"+"game1").update({
+        user2click: userclick
+      });
+    }
+  });    
+});
+bulbasaur.on("click", function(event){
+  bulbasaurClick =3;
+  userclick = bulbasaurClick;
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user.uid == user1) {
+      database.ref("games/"+"game1").update({
+        user1click: userclick
+      });
+    }else if (user.uid == user2){
+      database.ref("games/"+"game1").update({
+        user2click: userclick
+      });
+    }
+  });
+});
 function process(){
   if (user1click == charmanderClick && user2click == squirtleClick){
-          alert('user 2 won');
-          let newuser1hp = parseInt(user1hp)-1
-          console.log(newuser1hp);
-          database.ref("games/"+"game1").update({
+    alert('user 2 won');
+      let newuser1hp = parseInt(user1hp)-1
+        database.ref("games/"+"game1").update({
           user1click: "nothing",
           user2click: "nothing",
           user1hp: newuser1hp
-          });
+        });
   }else if(user1click == bulbasaurClick && user2click == squirtleClick){
-          alert('user 1 won');
-          let newuser2hp = parseInt(user2hp)-1
-          console.log(newuser2hp);          
-          database.ref("games/"+"game1").update({
+    alert('user 1 won');
+      let newuser2hp = parseInt(user2hp)-1;          
+        database.ref("games/"+"game1").update({
           user1click: "nothing",
           user2click: "nothing",
           user2hp: newuser2hp
-          });
+        });
   }else if(user1click == squirtleClick && user2click == charmanderClick){
-          alert('user 1 won');
-          let newuser2hp = parseInt(user2hp)-1
-          console.log(newuser2hp);
-          database.ref("games/"+"game1").update({
+    alert('user 1 won');
+      let newuser2hp = parseInt(user2hp)-1
+        database.ref("games/"+"game1").update({
           user1click: "nothing",
           user2click: "nothing",
           user2hp: newuser2hp
-          });
+        });
   }else if(user1click == bulbasaurClick && user2click == charmanderClick){
-          alert('user 2 won');
-          let newuser1hp = parseInt(user1hp)-1
-          console.log(newuser1hp);
-          database.ref("games/"+"game1").update({
+    alert('user 2 won');
+      let newuser1hp = parseInt(user1hp)-1
+        database.ref("games/"+"game1").update({
           user1click: "nothing",
           user2click: "nothing",
           user1hp: newuser1hp
-          });;
+        });;
   }else if(user1click == charmanderClick && user2click == bulbasaurClick){
-          alert('user 1 won');
-          let newuser2hp = parseInt(user2hp)-1
-          console.log(newuser2hp);
-          database.ref("games/"+"game1").update({
+    alert('user 1 won');
+      let newuser2hp = parseInt(user2hp)-1
+        database.ref("games/"+"game1").update({
           user1click: "nothing",
           user2click: "nothing",
           user2hp: newuser2hp
-          });
+        });
   }else if(user1click == squirtleClick && user2click == bulbasaurClick){
-          alert('user 2 won');
-          let newuser1hp = parseInt(user1hp)-1
-          console.log(newuser1hp);
-          database.ref("games/"+"game1").update({
+    alert('user 2 won');
+      let newuser1hp = parseInt(user1hp)-1
+        database.ref("games/"+"game1").update({
           user1click: "nothing",
           user2click: "nothing",
           user1hp: newuser1hp
-          });
+        });
   }else if(user1click == charmanderClick && user2click == charmanderClick){
-          alert('this is a tie');
-          database.ref("games/"+"game1").update({
-          user1click: "nothing",
-          user2click: "nothing"
-          });
+    alert('this is a tie');
+      database.ref("games/"+"game1").update({
+        user1click: "nothing",
+        user2click: "nothing"
+      });
   }else if(user1click == squirtleClick  && user2click == squirtleClick ){
-          alert('this is a tie');
-          database.ref("games/"+"game1").update({
-          user1click: "nothing",
-          user2click: "nothing"
-          });
+    alert('this is a tie');
+      database.ref("games/"+"game1").update({
+        user1click: "nothing",
+        user2click: "nothing"
+      });
   }else if(user1click == bulbasaurClick && user2click == bulbasaurClick){
-          alert('this is a tie');
-          database.ref("games/"+"game1").update({
-          user1click: "nothing",
-          user2click: "nothing"
-          });   
+    alert('this is a tie');
+      database.ref("games/"+"game1").update({
+        user1click: "nothing",
+        user2click: "nothing"
+      });   
   }
 }
-// $("#test").on("click", function(){
-//   process();
-// });
